@@ -1,36 +1,15 @@
-import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
 
-export default function PostPage() {
-
-    const [post, setPost] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const { id } = useParams()
-    const [url, setUrl] = useState(parseInt(id))
-    const navigate = useNavigate()
+export default function PostList({ list }) {
 
 
-    useEffect(() => {
-        setLoading(true)
-        fetch(`https://jsonplaceholder.typicode.com/posts/` + url)
-            .then(response => response.json())
-            .then(data => {
-                setPost(data)
-                setLoading(false)
-            })
-    }, [url])
+    return (
+        <>
+            <h1>postlist</h1>
+            <ul>
+                {list.map(el => <li key={el.id}><a href={`http://localhost:5173/postlist/${el.id}`}>{el.title}</a></li>)}
+            </ul>
+        </>
 
-
-    if (loading) {
-        return <h1>Loading...</h1>
-    }
-
-    return <>
-        <h1>{post.title}</h1>
-        <p>{post.body}</p>
-        {url > 1 && <button onClick={() => { setUrl(prev => prev - 1) }}>prev</button >}
-        {url < 100 && <button onClick={() => { setUrl(prev => prev + 1) }}>next</button>}
-    </>
-
+    )
 
 }

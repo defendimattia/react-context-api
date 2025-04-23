@@ -1,12 +1,23 @@
+import { useEffect, useState } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Homepage from "./pages/Homepage"
 import AboutUs from "./pages/AboutUs"
-import PostList from "./pages/PostList"
 import PostPage from "./pages/PostPage"
+import PostCard from "./pages/PostCard"
 import DefaultLayout from "./layouts/DefaultLayout"
 import "./App.css"
 
 function App() {
+
+  const [list, setList] = useState([])
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then(response => response.json())
+      .then(data => setList(data))
+
+  }, [])
+
   return (
     <>
       <BrowserRouter>
@@ -17,8 +28,8 @@ function App() {
             <Route path="/aboutus" element={<AboutUs />} />
 
             <Route path="/postlist">
-              <Route index element={<PostList />} />
-              <Route path=":id" element={<PostPage />} />
+              <Route index element={<PostPage list={list}/>} />
+              <Route path=":id" element={<PostCard />} />
             </Route>
 
             <Route path="*" element={<h1>Pagina non trovata!</h1>} />
