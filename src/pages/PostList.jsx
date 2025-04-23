@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import ListContext from "../contexts/ListContext"
+import ListContext from "../contexts/PostsContext"
 
 export default function PostList() {
 

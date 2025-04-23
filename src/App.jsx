@@ -6,7 +6,7 @@ import PostPage from "./pages/PostPage"
 import PostCard from "./pages/PostCard"
 import DefaultLayout from "./layouts/DefaultLayout"
 import "./App.css"
-import ListContext from "./contexts/ListContext"
+import PostsContext from "./contexts/PostsContext"
 
 function App() {
 
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-      <ListContext.Provider value={{list}}>
+      <PostsContext.Provider value={{list}}>
         <BrowserRouter>
           <Routes>
 
@@ -37,7 +37,7 @@ function App() {
 
           </Routes>
         </BrowserRouter>
-      </ListContext.Provider >
+      </PostsContext.Provider >
     </>
   )
 }
